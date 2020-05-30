@@ -1,25 +1,50 @@
 <html>
-<head>
-<style type="text/css">
-  #container {
-    max-width: 800px;
-    height: 800px;
-    margin: auto;
-  }
-</style>
-<script src="js/sigma.min.js"></script>
-<script src="js/sigma.parsers.json.js"></script>
-</head> 
-<body>
-<div id="container"></div>
 
-<script>
-  sigma.parsers.json('data.json', {
-    container: 'container',
-    settings: {
-      defaultNodeColor: '#ec5148'
+<head>
+  <style type="text/css">
+    #container {
+      max-width: 800px;
+      height: 800px;
+      margin: auto;
     }
-  });
-</script>
+  </style>
+  <script src="js/sigma.min.js"></script>
+  <script src="js/sigma.parsers.json.js"></script>
+  <script src="js/supervisor.js"></script>
+  <script src="js/worker.js"></script>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    var s = new sigma(
+      {
+        renderer: {
+          container: document.getElementById('container'),
+          type: 'canvas'
+        },
+        settings: {}
+      }
+    );
+    sigma.parsers.json('data.json', s, function () {
+      // this below adds x, y attributes as well as size = degree of the node 
+      var i,
+        nodes = s.graph.nodes(),
+        len = nodes.length;
+
+      for (i = 0; i < len; i++) {
+        nodes[i].x = Math.random();
+        nodes[i].y = Math.random();
+      }
+
+      // Refresh the display:
+      s.refresh();
+      s.startForceAtlas2();
+      window.setTimeout(function () { s.killForceAtlas2() }, 10000);
+    });
+
+  </script>
 </body>
+
 </html>

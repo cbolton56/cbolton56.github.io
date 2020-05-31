@@ -24,7 +24,10 @@
           container: document.getElementById('container'),
           type: 'canvas'
         },
-        settings: {}
+        settings: {
+          minNodeSize: 8,
+          maxNodeSize: 16
+        }
       }
     );
     sigma.parsers.json('data.json', s, function () {
@@ -36,6 +39,8 @@
       for (i = 0; i < len; i++) {
         nodes[i].x = Math.random();
         nodes[i].y = Math.random();
+        nodes[i].size = s.graph.degree(nodes[i].id);
+
       }
 
       // Refresh the display:

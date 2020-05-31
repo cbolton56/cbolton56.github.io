@@ -25,8 +25,8 @@
           type: 'canvas'
         },
         settings: {
-          minNodeSize: 0,
-          maxNodeSize: 10
+          minNodeSize: 2,
+          maxNodeSize: 30
         }
       }
     );
@@ -46,7 +46,7 @@
       // Refresh the display:
       s.refresh();
       s.startForceAtlas2();
-      window.setTimeout(function () { s.killForceAtlas2() }, 10000);
+      window.setTimeout(function () { s.killForceAtlas2() }, 5000);
     });
 
   </script>

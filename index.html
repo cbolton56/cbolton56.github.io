@@ -26,7 +26,9 @@
         },
         settings: {
           minNodeSize: 3,
-          maxNodeSize: 12
+          maxNodeSize: 12,
+          labelThreshold: 3,
+          defaultNodeColor: "#255"
         }
       }
     );
@@ -46,7 +48,7 @@
       // Refresh the display:
       s.refresh();
       s.startForceAtlas2();
-      window.setTimeout(function () { s.killForceAtlas2() }, 5000);
+      window.setTimeout(function () { s.killForceAtlas2() }, 3000);
     });
 
   </script>
